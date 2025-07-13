@@ -5,6 +5,11 @@ WORKDIR /app
 
 # Copy source code
 COPY . .
+# ✅ Make mvnw executable
+RUN chmod +x ./mvnw
+
+# ✅ Build the JAR inside Docker
+RUN ./mvnw clean package -DskipTests
 
 # Build the JAR inside the container
 RUN ./mvnw clean package -DskipTests
