@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/applications")
+
 public class ApplicationController {
 
     @Autowired
@@ -35,5 +36,10 @@ public class ApplicationController {
         appService.withdrawApplication(appId);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/recruiter/{recruiterId}")
+    public ResponseEntity<List<Application>> getApplicationsByRecruiter(@PathVariable Long recruiterId) {
+        return ResponseEntity.ok(appService.getApplicationsByRecruiter(recruiterId));
+    }
+
 }
 

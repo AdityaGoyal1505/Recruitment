@@ -17,13 +17,13 @@ public class HomepageController {
     @Autowired
     private JobPostService jobPostService;
 
-    @GetMapping("/featured")
-    public ResponseEntity<List<JobPost>> getFeaturedJobs() {
-        return ResponseEntity.ok(jobPostService.getFeaturedJobs());
-    }
+//    @GetMapping("/featured")
+//    public ResponseEntity<List<JobPost>> getFeaturedJobs() {
+//        return ResponseEntity.ok(jobPostService.getFeaturedJobs());
+//    }
 
-    @GetMapping("/latest")
-    public ResponseEntity<List<JobPost>> getLatestJobs() {
-        return ResponseEntity.ok(jobPostService.getLatestJobs());
-    }
+    //@GetMapping("/latest")
+   // public ResponseEntity<List<JobPost>> getLatestJobs() {
+      //  return ResponseEntity.ok(jobPostService.getLatestJobs());
+    //}
 }

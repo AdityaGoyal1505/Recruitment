@@ -3,6 +3,7 @@ package com.example.spring_first_project.Model;
 import jakarta.persistence.*;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@Table(name="app_user")
 public class User {
 
 
@@ -53,6 +54,18 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public User(Long id, String username, String email, String password, String role) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    public User(){
+
     }
 }
 

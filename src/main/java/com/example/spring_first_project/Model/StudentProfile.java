@@ -77,4 +77,18 @@ public class StudentProfile{
     public void setBio(String bio) {
         this.bio = bio;
     }
+
+    public StudentProfile(Long id, User user, String fullName, String resumeLink, String branch, String skills, String bio) {
+        this.id = id;
+        this.user = user;
+        this.fullName = fullName;
+        this.resumeLink = resumeLink;
+        this.branch = branch;
+        this.skills = skills;
+        this.bio = bio;
+    }
+
+    public StudentProfile(){
+
+    }
 }

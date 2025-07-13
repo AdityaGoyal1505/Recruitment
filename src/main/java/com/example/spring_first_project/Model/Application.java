@@ -59,4 +59,16 @@ public class Application{
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public Application(Long id, StudentProfile student, JobPost job, LocalDateTime appliedAt, String status) {
+        this.id = id;
+        this.student = student;
+        this.job = job;
+        this.appliedAt = appliedAt;
+        this.status = status;
+    }
+
+    public Application(){
+
+    }
 }

@@ -1,9 +1,9 @@
 package com.example.spring_first_project.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.MapsId;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class RecruiterProfile {
@@ -21,6 +21,9 @@ public class RecruiterProfile {
         private String companyWebsite;
         private String designation;
         private String aboutCompany;
+//       @OneToMany(mappedBy = "recruiter", cascade = CascadeType.ALL, orphanRemoval = true)
+//       private List<JobPost> jobs = new ArrayList<>();
+
 
     public Long getId() {
         return id;
@@ -68,6 +71,28 @@ public class RecruiterProfile {
 
     public void setAboutCompany(String aboutCompany) {
         this.aboutCompany = aboutCompany;
+    }
+
+//    public List<JobPost> getJobs() {
+//        return jobs;
+//    }
+//
+//    public void setJobs(List<JobPost> jobs) {
+//        this.jobs = jobs;
+//    }
+
+
+    public RecruiterProfile(Long id, User user, String companyName, String companyWebsite, String designation, String aboutCompany) {
+        this.id = id;
+        this.user = user;
+        this.companyName = companyName;
+        this.companyWebsite = companyWebsite;
+        this.designation = designation;
+        this.aboutCompany = aboutCompany;
+    }
+
+    public RecruiterProfile(){
+
     }
 }
 
