@@ -1,14 +1,22 @@
-# Use Eclipse Temurin OpenJDK 17 as base image
-FROM eclipse-temurin:21
+# Stage 1: Build the Spring Boot app
+FROM eclipse-temurin:21 AS builder
 
-# Create app directory
 WORKDIR /app
 
-# Copy jar file from build context
-COPY target/spring-first-project-0.0.1-SNAPSHOT.jar app.jar
+# Copy source code
+COPY . .
 
-# Expose the port that Spring Boot listens on
+# Build the JAR inside the container
+RUN ./mvnw clean package -DskipTests
+
+# Stage 2: Run the app
+FROM eclipse-temurin:21
+
+WORKDIR /app
+
+# Copy the built jar from builder stage
+COPY --from=builder /app/target/*.jar app.jar
+
 EXPOSE 8080
 
-# Run the jar file
 ENTRYPOINT ["java", "-jar", "app.jar"]
