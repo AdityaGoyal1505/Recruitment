@@ -21,8 +21,16 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
-        boolean authenticated = userService.authenticate(loginRequest.getUsername(), loginRequest.getPassword());
-        response.put("message", "Login successful");
-        return ResponseEntity.ok(response);
-    }
+        boolean authenticated = userService.authenticate(
+            loginRequest.getUsername(), 
+            loginRequest.getPassword()
+        );
+    
+        if (authenticated) {
+            return ResponseEntity.ok("Login successful");
+        } else {
+            return ResponseEntity.status(401).body("Invalid credentials");
+        }
+}
+
 }
