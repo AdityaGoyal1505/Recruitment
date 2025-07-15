@@ -20,17 +20,15 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
-        boolean authenticated = userService.authenticate(
-            loginRequest.getUsername(), 
-            loginRequest.getPassword()
-        );
-    
-        if (authenticated) {
-            return ResponseEntity.ok("Login successful");
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+        User user = userService.authenticate(request.getUsername(), request.getPassword());
+        if (user != null) {
+            return ResponseEntity.ok(user);
         } else {
-            return ResponseEntity.status(401).body("Invalid credentials");
+            return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(Map.of("message", "Invalid username or password"));
         }
-}
+    }
 
 }
