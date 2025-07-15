@@ -6,6 +6,10 @@ import com.example.spring_first_project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import java.util.Map;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api/users")
@@ -19,16 +23,17 @@ public class UserController {
         return ResponseEntity.ok(userService.registerUser(user));
     }
 
-    @PostMapping("/login")
+   @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        User user = userService.authenticate(request.getUsername(), request.getPassword());
+        User user = authService.authenticate(request.getUsername(), request.getPassword());
         if (user != null) {
             return ResponseEntity.ok(user);
         } else {
-            return ResponseEntity
-                .status(HttpStatus.UNAUTHORIZED)
-                .body(Map.of("message", "Invalid username or password"));
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Invalid username or password");
+            return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
         }
     }
+
 
 }
