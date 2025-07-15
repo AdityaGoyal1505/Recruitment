@@ -18,20 +18,28 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserRepository userRepository;
+
+
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody User user) {
         return ResponseEntity.ok(userService.registerUser(user));
     }
 
    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        User user = authService.authenticate(request.getUsername(), request.getPassword());
-        if (user != null) {
+    public ResponseEntity<?> login(@RequestBody Map<String, String> loginRequest) {
+        String username = loginRequest.get("username");
+        String password = loginRequest.get("password");
+    
+        User user = userRepository.findByUsername(username);
+    
+        if (user != null && user.getPassword().equals(password)) {
             return ResponseEntity.ok(user);
         } else {
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("message", "Invalid username or password");
-            return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "Invalid username or password");
+            return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
         }
     }
 
