@@ -2,6 +2,7 @@ package com.example.spring_first_project.Controller;
 
 import com.example.spring_first_project.dto.LoginRequest;
 import com.example.spring_first_project.Model.User;
+import com.example.spring_first_project.repository.UserRepository;
 import com.example.spring_first_project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
