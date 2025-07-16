@@ -24,22 +24,22 @@ public class ApplicationController {
     }
     @GetMapping("/student/{studentId}")
     public ResponseEntity<List<Application>> getApplicationsByStudent(@PathVariable Long studentId) {
-        return ResponseEntity.ok(appService.getApplicationsByStudent(studentId));
+        return ResponseEntity.ok(applicationService.getApplicationsByStudent(studentId));
     }
 
     @GetMapping("/job/{jobId}")
     public ResponseEntity<List<Application>> getApplicationsForJob(@PathVariable Long jobId) {
-        return ResponseEntity.ok(appService.getApplicationsByJob(jobId));
+        return ResponseEntity.ok(applicationService.getApplicationsByJob(jobId));
     }
 
     @DeleteMapping("/{appId}")
     public ResponseEntity<Void> withdraw(@PathVariable Long appId) {
-        appService.withdrawApplication(appId);
+        applicationService.withdrawApplication(appId);
         return ResponseEntity.noContent().build();
     }
     @GetMapping("/recruiter/{recruiterId}")
     public ResponseEntity<List<Application>> getApplicationsByRecruiter(@PathVariable Long recruiterId) {
-        return ResponseEntity.ok(appService.getApplicationsByRecruiter(recruiterId));
+        return ResponseEntity.ok(applicationService.getApplicationsByRecruiter(recruiterId));
     }
 
 }
