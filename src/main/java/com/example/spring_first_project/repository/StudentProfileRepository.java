@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public  interface StudentProfileRepository extends JpaRepository<StudentProfile, Long> {
-    StudentProfile findByUserId(Long userId);
+    Optional<StudentProfile> findByUserId(Long userId);
 }
