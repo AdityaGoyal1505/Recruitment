@@ -14,8 +14,28 @@ public class RecruiterProfileController {
     private RecruiterProfileService recruiterService;
 
     @PostMapping("/create")
-    public ResponseEntity<RecruiterProfile> create(@RequestBody RecruiterProfile profile) {
-        return ResponseEntity.ok(recruiterService.createProfile(profile));
+    public ResponseEntity<?> create(@RequestBody RecruiterProfile profile) {
+        try {
+            // Extract user ID from request body
+            Long userId = profile.getUser().getId();
+    
+            // Fetch managed user from DB
+            User user = userRepository.findById(userId)
+                    .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + userId));
+    
+            // Ensure the recruiter profile uses the managed User entity
+            profile.setUser(user);
+            profile.setId(userId); // Important: because you're using @MapsId
+    
+            RecruiterProfile savedProfile = recruiterService.createProfile(profile);
+            return ResponseEntity.ok(savedProfile);
+    
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace(); // Optional: for debugging
+            return ResponseEntity.internalServerError().body("Error while creating recruiter profile: " + e.getMessage());
+        }
     }
 
     @GetMapping("/{userId}")
