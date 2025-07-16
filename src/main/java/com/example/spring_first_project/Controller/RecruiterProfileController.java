@@ -4,6 +4,8 @@ import com.example.spring_first_project.Model.RecruiterProfile;
 import com.example.spring_first_project.service.RecruiterProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import com.example.spring_first_project.Model.User;
+import com.example.spring_first_project.repository.UserRepository;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,7 +14,8 @@ public class RecruiterProfileController {
 
     @Autowired
     private RecruiterProfileService recruiterService;
-
+    @Autowired
+    private UserRepository userRepository;
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody RecruiterProfile profile) {
         try {
