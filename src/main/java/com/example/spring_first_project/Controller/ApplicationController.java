@@ -17,8 +17,8 @@ public class ApplicationController {
     private ApplicationService appService;
 
     @PostMapping("/apply")
-    public ResponseEntity<Application> apply(@RequestBody Application application) {
-        return ResponseEntity.ok(appService.applyToJob(application));
+    public ResponseEntity<Application> apply(@RequestBody ApplicationRequest request) {
+        return ResponseEntity.ok(appService.applyToJob(request));
     }
 
     @GetMapping("/student/{studentId}")
