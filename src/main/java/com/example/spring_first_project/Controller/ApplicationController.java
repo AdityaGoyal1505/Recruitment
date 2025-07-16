@@ -2,6 +2,7 @@ package com.example.spring_first_project.Controller;
 
 import com.example.spring_first_project.Model.Application;
 import com.example.spring_first_project.service.ApplicationService;
+import com.example.spring_first_project.dto.ApplicationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
