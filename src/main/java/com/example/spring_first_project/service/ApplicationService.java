@@ -6,7 +6,7 @@ import java.util.List;
 
 @Service
 public interface ApplicationService {
-    Application applyToJob(Application app);
+    Application applyToJob(ApplicationRequest request);
     List<Application> getApplicationsByStudent(Long studentId);
     List<Application> getApplicationsByJob(Long jobId);
     List<Application> getApplicationsByRecruiter(Long recruiterId);
