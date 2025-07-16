@@ -28,22 +28,22 @@ public class ApplicationServiceImpl implements ApplicationService {
     private StudentProfileRepository studentProfileRepository;
 
     @Override
-    public Application applyToJob(Application app) {
-        // Fetch full StudentProfile
-        StudentProfile student = studentProfileRepository.findById(app.getStudent().getId())
+    public Application applyToJob(ApplicationRequest request) {
+        StudentProfile student = studentProfileRepository.findByUserId(request.getUserId())
                 .orElseThrow(() -> new EntityNotFoundException("Student not found"));
-
-        // Fetch full JobPost
-        JobPost job = jobPostRepository.findById(app.getJob().getId())
+    
+        JobPost job = jobPostRepository.findById(request.getJobId())
                 .orElseThrow(() -> new EntityNotFoundException("Job not found"));
-
+    
+        Application app = new Application();
         app.setStudent(student);
         app.setJob(job);
         app.setAppliedAt(LocalDateTime.now());
-
+        app.setStatus("PENDING");
+    
         return applicationRepository.save(app);
     }
-
+    
     @Override
     public List<Application> getApplicationsByStudent(Long studentId) {
         return applicationRepository.findByStudentId(studentId);
