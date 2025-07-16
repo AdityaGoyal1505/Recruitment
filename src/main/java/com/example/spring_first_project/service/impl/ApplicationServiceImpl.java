@@ -2,6 +2,7 @@ package com.example.spring_first_project.service.impl;
 
 
 import com.example.spring_first_project.Model.Application;
+import com.example.spring_first_project.dto.ApplicationRequest;
 import com.example.spring_first_project.Model.JobPost;
 import com.example.spring_first_project.Model.StudentProfile;
 import com.example.spring_first_project.repository.ApplicationRepository;
