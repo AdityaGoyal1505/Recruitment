@@ -15,13 +15,13 @@ import java.util.List;
 public class ApplicationController {
 
     @Autowired
-    private ApplicationService appService;
+    private ApplicationService applicationService;
 
     @PostMapping("/apply")
     public ResponseEntity<Application> apply(@RequestBody ApplicationRequest request) {
-        return ResponseEntity.ok(appService.applyToJob(request));
+        Application savedApp = applicationService.applyToJob(request);
+        return ResponseEntity.ok(savedApp);
     }
-
     @GetMapping("/student/{studentId}")
     public ResponseEntity<List<Application>> getApplicationsByStudent(@PathVariable Long studentId) {
         return ResponseEntity.ok(appService.getApplicationsByStudent(studentId));
