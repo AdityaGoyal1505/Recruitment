@@ -1,19 +1,12 @@
 package com.example.spring_first_project.service.impl;
 
 import com.example.spring_first_project.Model.RecruiterProfile;
-import com.example.spring_first_project.service.RecruiterProfileService;
-import org.springframework.stereotype.Service;
-
-
-
-import com.example.spring_first_project.Model.RecruiterProfile;
+import com.example.spring_first_project.Model.User;
 import com.example.spring_first_project.repository.RecruiterProfileRepository;
 import com.example.spring_first_project.repository.UserRepository;
 import com.example.spring_first_project.service.RecruiterProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class RecruiterProfileServiceImpl implements RecruiterProfileService {
@@ -28,11 +21,11 @@ public class RecruiterProfileServiceImpl implements RecruiterProfileService {
     public RecruiterProfile createProfile(RecruiterProfile profile) {
         Long userId = profile.getUser().getId();
 
-        // Fetch the user from the DB
+        // Fetch the managed user entity from the DB
         User user = userRepo.findById(userId)
-                            .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+                .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
 
-        // Set managed user into profile
+        // Set managed user into profile to prevent detached entity issues
         profile.setUser(user);
 
         return recruiterRepo.save(profile);
