@@ -22,11 +22,10 @@ public class RecruiterProfileServiceImpl implements RecruiterProfileService {
         Long userId = profile.getUser().getId();
     
         // Get managed user entity
-        User user = userRepo.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+        User user = userRepo.findById(userId);
     
         // Check if a profile already exists
-        RecruiterProfile existing = recruiterRepo.findByUserId(userId).orElse(null);
+        RecruiterProfile existing = recruiterRepo.findByUserId(userId);
     
         if (existing != null) {
             // Instead of modifying the detached profile, update fields manually on managed entity
