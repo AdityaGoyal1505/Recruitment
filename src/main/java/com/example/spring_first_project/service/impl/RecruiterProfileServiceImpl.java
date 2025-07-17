@@ -17,35 +17,42 @@ import java.util.Optional;
 @Service
 public class RecruiterProfileServiceImpl implements RecruiterProfileService {
 
-    private final RecruiterProfileRepository recruiterProfileRepository;
+    @Autowired
+    private RecruiterProfileRepository recruiterRepo;
 
     @Autowired
-    public RecruiterProfileServiceImpl(RecruiterProfileRepository recruiterProfileRepository) {
-        this.recruiterProfileRepository = recruiterProfileRepository;
-    }
+    private UserRepository userRepo;
 
     @Override
     public RecruiterProfile createProfile(RecruiterProfile profile) {
-        return recruiterProfileRepository.save(profile);
+        Long userId = profile.getUser().getId();
+
+        // Fetch the user from the DB
+        User user = userRepo.findById(userId)
+                            .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+
+        // Set managed user into profile
+        profile.setUser(user);
+
+        return recruiterRepo.save(profile);
     }
 
     @Override
     public RecruiterProfile getByUserId(Long userId) {
-        return recruiterProfileRepository.findByUserId(userId);
-
+        return recruiterRepo.findByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("Recruiter profile not found for user ID: " + userId));
     }
 
     @Override
-    public RecruiterProfile updateProfile(Long userId, RecruiterProfile updatedProfile) {
-        Optional<RecruiterProfile> existingProfileOpt = recruiterProfileRepository.findById(userId);
-        if (existingProfileOpt.isPresent()) {
-            RecruiterProfile existingProfile = existingProfileOpt.get();
-            existingProfile.setCompanyName(updatedProfile.getCompanyName());
-            // add other fields to update
-            return recruiterProfileRepository.save(existingProfile);
-        }
-        return null; // or throw exception
+    public RecruiterProfile updateProfile(Long userId, RecruiterProfile updated) {
+        RecruiterProfile existing = recruiterRepo.findByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("Recruiter profile not found for user ID: " + userId));
+
+        existing.setCompanyName(updated.getCompanyName());
+        existing.setCompanyWebsite(updated.getCompanyWebsite());
+        existing.setDesignation(updated.getDesignation());
+        existing.setAboutCompany(updated.getAboutCompany());
+
+        return recruiterRepo.save(existing);
     }
 }
-
-
