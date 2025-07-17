@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.spring_first_project.Model.RecruiterProfile;
 import com.example.spring_first_project.repository.RecruiterProfileRepository;
+import com.example.spring_first_project.repository.UserRepository;
 import com.example.spring_first_project.service.RecruiterProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
