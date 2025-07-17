@@ -7,6 +7,7 @@ import com.example.spring_first_project.repository.UserRepository;
 import com.example.spring_first_project.service.RecruiterProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 @Service
 public class RecruiterProfileServiceImpl implements RecruiterProfileService {
@@ -17,15 +18,16 @@ public class RecruiterProfileServiceImpl implements RecruiterProfileService {
     @Autowired
     private UserRepository userRepo;
 
-    @Override
+   @Override
     public RecruiterProfile createProfile(RecruiterProfile profile) {
         Long userId = profile.getUser().getId();
     
         // Get managed user entity
-        User user = userRepo.findById(userId);
+        User user = userRepo.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
     
         // Check if a profile already exists
-        RecruiterProfile existing = recruiterRepo.findByUserId(userId);
+        RecruiterProfile existing = recruiterRepo.findByUserId(userId).orElse(null);
     
         if (existing != null) {
             // Instead of modifying the detached profile, update fields manually on managed entity
@@ -36,18 +38,17 @@ public class RecruiterProfileServiceImpl implements RecruiterProfileService {
     
             return recruiterRepo.save(existing);
         }
-
-    // For new profile, use a fresh object
-    RecruiterProfile newProfile = new RecruiterProfile();
-    newProfile.setUser(user);
-    newProfile.setCompanyName(profile.getCompanyName());
-    newProfile.setCompanyWebsite(profile.getCompanyWebsite());
-    newProfile.setDesignation(profile.getDesignation());
-    newProfile.setAboutCompany(profile.getAboutCompany());
-
-    return recruiterRepo.save(newProfile);
-}
-
+    
+        // For new profile, use a fresh object
+        RecruiterProfile newProfile = new RecruiterProfile();
+        newProfile.setUser(user);
+        newProfile.setCompanyName(profile.getCompanyName());
+        newProfile.setCompanyWebsite(profile.getCompanyWebsite());
+        newProfile.setDesignation(profile.getDesignation());
+        newProfile.setAboutCompany(profile.getAboutCompany());
+    
+        return recruiterRepo.save(newProfile);
+    }
 
 
     @Override
