@@ -5,6 +5,7 @@ import com.example.spring_first_project.Model.User;
 import com.example.spring_first_project.repository.RecruiterProfileRepository;
 import com.example.spring_first_project.repository.UserRepository;
 import com.example.spring_first_project.service.RecruiterProfileService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +26,17 @@ public class RecruiterProfileServiceImpl implements RecruiterProfileService {
         User user = userRepo.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
 
-        // Set managed user into profile to prevent detached entity issues
+        // Set the managed user
         profile.setUser(user);
 
-        return recruiterRepo.save(profile);
+        // Check if a profile already exists
+        return recruiterRepo.findByUserId(userId).map(existing -> {
+            existing.setCompanyName(profile.getCompanyName());
+            existing.setCompanyWebsite(profile.getCompanyWebsite());
+            existing.setDesignation(profile.getDesignation());
+            existing.setAboutCompany(profile.getAboutCompany());
+            return recruiterRepo.save(existing);
+        }).orElseGet(() -> recruiterRepo.save(profile));
     }
 
     @Override
