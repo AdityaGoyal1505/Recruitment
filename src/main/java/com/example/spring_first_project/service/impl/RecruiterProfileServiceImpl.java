@@ -20,16 +20,28 @@ public class RecruiterProfileServiceImpl implements RecruiterProfileService {
     @Override
     public RecruiterProfile createProfile(RecruiterProfile profile) {
         Long userId = profile.getUser().getId();
-
-        // Fetch the managed user entity from the DB
+    
+        // Fetch the managed user entity
         User user = userRepo.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
-
-        // Set managed user into profile to prevent detached entity issues
+    
+        // Check if a profile already exists
+        RecruiterProfile existing = recruiterRepo.findByUserId(userId).orElse(null);
+    
+        if (existing != null) {
+            // Update the existing profile
+            existing.setCompanyName(profile.getCompanyName());
+            existing.setCompanyWebsite(profile.getCompanyWebsite());
+            existing.setDesignation(profile.getDesignation());
+            existing.setAboutCompany(profile.getAboutCompany());
+            return recruiterRepo.save(existing);
+        }
+    
+        // New profile creation
         profile.setUser(user);
-
         return recruiterRepo.save(profile);
     }
+
 
     @Override
     public RecruiterProfile getByUserId(Long userId) {
