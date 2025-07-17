@@ -5,7 +5,6 @@ import com.example.spring_first_project.Model.User;
 import com.example.spring_first_project.repository.RecruiterProfileRepository;
 import com.example.spring_first_project.repository.UserRepository;
 import com.example.spring_first_project.service.RecruiterProfileService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,29 +25,27 @@ public class RecruiterProfileServiceImpl implements RecruiterProfileService {
         User user = userRepo.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
 
-        // Set the managed user
+        // Set managed user into profile to prevent detached entity issues
         profile.setUser(user);
 
-        // Check if a profile already exists
-        return recruiterRepo.findByUserId(userId).map(existing -> {
-            existing.setCompanyName(profile.getCompanyName());
-            existing.setCompanyWebsite(profile.getCompanyWebsite());
-            existing.setDesignation(profile.getDesignation());
-            existing.setAboutCompany(profile.getAboutCompany());
-            return recruiterRepo.save(existing);
-        }).orElseGet(() -> recruiterRepo.save(profile));
+        return recruiterRepo.save(profile);
     }
 
     @Override
     public RecruiterProfile getByUserId(Long userId) {
-        return recruiterRepo.findByUserId(userId)
-                .orElseThrow(() -> new RuntimeException("Recruiter profile not found for user ID: " + userId));
+        RecruiterProfile profile = recruiterRepo.findByUserId(userId);
+        if (profile == null) {
+            throw new RuntimeException("Recruiter profile not found for user ID: " + userId);
+        }
+        return profile;
     }
 
     @Override
     public RecruiterProfile updateProfile(Long userId, RecruiterProfile updated) {
-        RecruiterProfile existing = recruiterRepo.findByUserId(userId)
-                .orElseThrow(() -> new RuntimeException("Recruiter profile not found for user ID: " + userId));
+        RecruiterProfile existing = recruiterRepo.findByUserId(userId);
+        if (existing == null) {
+            throw new RuntimeException("Recruiter profile not found for user ID: " + userId);
+        }
 
         existing.setCompanyName(updated.getCompanyName());
         existing.setCompanyWebsite(updated.getCompanyWebsite());
