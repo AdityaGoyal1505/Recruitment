@@ -13,9 +13,10 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
-                        .allowedOrigins("https://recruitment-app-blue.vercel.app")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE")
-                        .allowedHeaders("*");
+                        .allowedOrigins("https://your-vercel-frontend.vercel.app","https://recruitment-app-adityagoyal1505s-projects.vercel.app/","http://localhost:3000")  // 👈 Replace with your actual deployed frontend URL
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*")
+                        .allowCredentials(true);  // optional if you're sending cookies
             }
         };
     }
