@@ -1,0 +1,56 @@
+.job-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    height: 180px;
+    padding: 20px;
+    background: linear-gradient(to right, #ffd90030, #fff);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.input-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    align-items: center;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
+    width: 50%;
+    margin-top: 20px;
+}
+
+.input-button input {
+    margin-top: 12px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background: transparent;
+}
+
+.job-list-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+}
+
+.job-card {
+    width: 100%;
+    max-width: 800px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}

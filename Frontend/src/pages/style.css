@@ -1,0 +1,255 @@
+body{
+    background-color: rgb(255, 255, 255);
+    color: rgb(2, 2, 2);
+    font-family: Arial, sans-serif;
+    text-align: left;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(to right, rgba(255, 217, 0, 0.372), #ffffff);
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  color:black;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: black;
+  margin-bottom: 30px;
+}
+
+/* Search Bar Container */
+.hero > div > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+
+/* Icons + Fields */
+.hero div > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Stats Section */
+.stats {
+  background-color: #f8f9fa;
+  padding: 60px 20px;
+}
+
+.stats > div > div {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Individual Stat Box */
+.stats > div > div > div {
+  background: white;
+  border-radius: 12px;
+  padding: 30px 20px;
+  text-align: center;
+  width: 250px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.stats svg {
+  height: 40px;
+  width: 40px;
+  color: gold;
+  margin-bottom: 15px;
+}
+
+.stats h3 {
+  font-size: 1.5rem;
+  color:black;
+  margin-bottom: 5px;
+}
+
+.stats p {
+  color: #666;
+  font-size: 1rem;
+}
+
+/* Container for all search elements */
+.hero-search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 0px 5px;
+  width: 50%;
+}
+
+.location-group {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px 25px;
+  width: 30%;
+}
+
+.input-group input,
+.location-group select {
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: transparent;
+}
+
+.input-group input {
+  width: 100%;
+  margin-top: 15px;
+  font-size: 1rem;
+  color: black;
+}
+/* Search Button */
+.hero-search-container button {
+  width:100%;
+  background-color: #fcd200;
+  color: black;
+  font-weight: bold;
+  padding: 0 24px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+}
+
+.hero-search-container button:hover {
+  background-color: #e6b800;
+}
+
+/* Responsive Fix */
+@media (max-width: 768px) {
+  .hero-search-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-search-container button {
+    width: 100%;
+  }
+}
+
+.home-job-list{
+  align-items: center;
+}
+
+.home-job-list h1 {
+    font-size: 36px;
+    color: gold;
+    margin-bottom: 30px;
+    text-align: center;
+    
+}
+
+.home-job-list-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.home-job-list-grid > * {
+  flex: 0 1 calc(33.333% - 20px); /* 3 items per row minus gap */
+  max-width: calc(33.333% - 20px);
+}
+
+
+.filter-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.filter-section label {
+    font-size: 16px;
+    color: #333;
+    margin-right: 8px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.filter-section div {
+    width: 30%;
+}
+
+.filter-section select {
+    width: 100%;
+    padding: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 100px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+    background-color: #fff;
+    color: #333;
+}
+
+.filter-section option {
+    font-weight: 500;
+    font-size: 16px;
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+}
+
+.filter-section option:hover {
+    background-color: black;
+    color: gold;
+}
+
+.filter-section select:focus {
+    border-color: gold;
+    outline: none;
+}
+
+.filter-section select:hover {
+    border-color: gold;
+}
+
+#view-all-jobs-button {
+  padding: 10px 24px;
+  font-size: 1rem;
+  border-radius: 50px;
+  background-color: black;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  width: 200px;
+}

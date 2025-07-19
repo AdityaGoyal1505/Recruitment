@@ -1,0 +1,132 @@
+.footer {
+  background-color: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+  padding: 2rem 1rem 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  color: #1f2937;
+}
+
+.footer-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* Logo + Info */
+.footer-brand {
+  flex: 1 1 250px;
+}
+
+.footer-logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+.logo-highlight {
+  font-size: 1.5rem;
+  color: #facc15;
+}
+
+.footer-text {
+  font-size: 0.95rem;
+  color: #6b7280;
+  max-width: 300px;
+}
+
+/* Social Icons */
+.social-icons {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.social-icons a {
+  width: 24px;
+  color: gold;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+}
+
+/* Footer Links */
+.footer-links {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  flex: 2 1 500px;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-column h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.footer-column a {
+  text-decoration: none;
+  color: #374151;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.footer-column a:hover {
+  color: #facc15;
+}
+
+/* Bottom Row */
+.footer-bottom {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #9ca3af;
+  position: relative;
+}
+
+/* Back to top button */
+.back-to-top {
+  position: absolute;
+  right: 1rem;
+  top: -1.5rem;
+  background: #facc15;
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.back-to-top:hover {
+  background: #eab308;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    position: static;
+    margin-top: 3rem;
+  }
+
+  .back-to-top {
+    position: static;
+    margin: 1rem auto 0;
+    display: inline-block;
+  }
+}
