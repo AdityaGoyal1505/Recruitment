@@ -12,11 +12,11 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/**")
-                        .allowedOrigins("https://recruitment-app-blue.vercel.app/","https://recruitment-app-adityagoyal1505s-projects.vercel.app","http://localhost:3000")  // 👈 Replace with your actual deployed frontend URL
+                registry.addMapping("/**")  // allow all paths
+                        .allowedOrigins("*")  // allow all origins (no credentials!)
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*")
-                        .allowCredentials(true);  // optional if you're sending cookies
+                        .allowedHeaders("*");
+                        // Do NOT call .allowCredentials(true) here!
             }
         };
     }
