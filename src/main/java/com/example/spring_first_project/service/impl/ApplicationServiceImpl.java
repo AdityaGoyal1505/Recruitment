@@ -67,6 +67,28 @@ public class ApplicationServiceImpl implements ApplicationService {
     public List<Application> getApplicationsByRecruiter(Long recruiterId) {
         return applicationRepository.findByJobRecruiterId(recruiterId);
     }
+    @Override
+    public Application updateApplicationStatus(Long appId, String status,Long recruiterId) {
+        Application application = applicationRepository.findById(appId)
+                .orElseThrow(() -> new EntityNotFoundException("Application not found"));
+
+        Long jobRecruiterId = application.getJob().getRecruiter().getId();
+
+
+
+        if (!jobRecruiterId.equals(jobRecruiterId)) {
+            throw new SecurityException("You are not authorized to update this application.");
+        }
+
+        if (!status.equalsIgnoreCase("SELECTED") && !status.equalsIgnoreCase("REJECTED")) {
+            throw new IllegalArgumentException("Invalid status. Use SELECTED or REJECTED.");
+        }
+
+        application.setStatus(status.toUpperCase());
+        return applicationRepository.save(application);
+    }
+
+
 
 
 }

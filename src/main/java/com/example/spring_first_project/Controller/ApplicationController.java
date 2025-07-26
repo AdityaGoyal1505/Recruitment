@@ -40,6 +40,24 @@ public class ApplicationController {
     public ResponseEntity<List<Application>> getApplicationsByRecruiter(@PathVariable Long recruiterId) {
         return ResponseEntity.ok(appService.getApplicationsByRecruiter(recruiterId));
     }
+    @PutMapping("/{appId}/status")
+    public ResponseEntity<Application> updateApplicationStatus(
+            @PathVariable Long appId,
+            @RequestParam String status,
+            @RequestParam Long recruiterId) {
+        try {
+            Application updatedApplication = appService.updateApplicationStatus(appId, status, recruiterId);
+            return ResponseEntity.ok(updatedApplication);
+        } catch (SecurityException e) {
+            return ResponseEntity.status(403).build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 
 }
 

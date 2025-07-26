@@ -11,4 +11,8 @@ public interface ApplicationService {
     List<Application> getApplicationsByJob(Long jobId);
     List<Application> getApplicationsByRecruiter(Long recruiterId);
     void withdrawApplication(Long appId);
+    // NEW — ✅
+    Application updateApplicationStatus(Long appId, String status, Long recruiterId);
+
+
 }
