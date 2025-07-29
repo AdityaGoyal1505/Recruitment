@@ -14,7 +14,7 @@ public class GlobalCorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                    .allowedOrigins("http://localhost:3000", "https://gojob-kappa.vercel.app/")
+                    .allowedOrigins("http://localhost:3000", "https://gojob-kappa.vercel.app/","https://jobportal-omega-lac.vercel.app/")
                     .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                     .allowedHeaders("*")
                     .allowCredentials(true); // If sending cookies or Authorization headers
