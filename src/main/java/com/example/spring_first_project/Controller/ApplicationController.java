@@ -17,19 +17,8 @@ public class ApplicationController {
     private ApplicationService appService;
 
     @PostMapping("/apply")
-    public Application apply(Application application) {
-        Student student = studentRepository.findById(application.getStudent().getId())
-                            .orElseThrow(() -> new RuntimeException("Student not found"));
-    
-        Job job = jobRepository.findById(application.getJob().getId())
-                            .orElseThrow(() -> new RuntimeException("Job not found"));
-    
-        application.setStudent(student);
-        application.setJob(job);
-        application.setStatus("PENDING");
-        application.setAppliedAt(LocalDateTime.now());
-    
-        return applicationRepository.save(application);
+    public ResponseEntity<Application> apply(@RequestBody Application application) {
+        return ResponseEntity.ok(appService.applyToJob(application));
     }
 
     @GetMapping("/student/{studentId}")
